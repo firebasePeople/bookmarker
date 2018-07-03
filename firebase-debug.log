@@ -1,0 +1,45 @@
+[debug] [2018-07-02T22:33:13.640Z] ----------------------------------------------------------------------
+[debug] [2018-07-02T22:33:13.642Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Parikshit\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-07-02T22:33:13.642Z] CLI Version:   3.18.5
+[debug] [2018-07-02T22:33:13.642Z] Platform:      win32
+[debug] [2018-07-02T22:33:13.642Z] Node Version:  v8.10.0
+[debug] [2018-07-02T22:33:13.643Z] Time:          Tue Jul 03 2018 04:03:13 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:13.643Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-07-02T22:33:13.655Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-07-02T22:33:13.656Z] > authorizing via signed-in user
+[debug] [2018-07-02T22:33:13.658Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/booktracker-9643e  
+  
+ Tue Jul 03 2018 04:03:13 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:15.083Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-02T22:33:15.084Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/booktracker-9643e/tokens  
+  
+ Tue Jul 03 2018 04:03:15 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:16.031Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-02T22:33:16.032Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/booktracker-9643e  
+  
+ Tue Jul 03 2018 04:03:16 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:17.843Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'E:\firebase\booktracker'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-07-02T22:33:29.709Z] Fetching environment
+[debug] [2018-07-02T22:33:29.711Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/801458307525:getServerAppConfig  
+  
+ Tue Jul 03 2018 04:03:29 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:29.712Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/801458307525/clients/_:getWebAppConfig  
+  
+ Tue Jul 03 2018 04:03:29 GMT+0530 (India Standard Time)
+[debug] [2018-07-02T22:33:30.720Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-02T22:33:30.720Z] Starting @google-cloud/functions-emulator
+[debug] [2018-07-02T22:33:31.334Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+
+[warn] !  functions: Error from emulator. Error: Emulator crashed! Check the log file...
+[debug] [2018-07-02T22:33:36.429Z] Error: Emulator crashed! Check the log file...
+    at ChildProcess.child.on (C:\Users\Parikshit\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\@google-cloud\functions-emulator\src\cli\controller.js:650:24)
+    at emitTwo (events.js:126:13)
+    at ChildProcess.emit (events.js:214:7)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:198:12)
