@@ -112,6 +112,7 @@
                 console.log('ulidparam' + UlIdParam);
                 var ulId = document.querySelector('#' + UlIdParam);
                 liElement.innerText = bookName;
+                liElement.id = bookName;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             }
 
