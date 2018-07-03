@@ -59,9 +59,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function(e) {
-            e.preventDefault();
+            // e.preventDefault();
 
             var dbRef = firebase.database();
+
+
+            function getDbData(collectionName) {
+                var collRef = dbRef.ref().child(collectionName);
+
+                collRef.on('value', function(snapshot) {
+                    console.log(snapshot.val());
+                });
+            };
+
 
             var readingBtn = document.querySelector('#readingBtn');
             var toreadBtn = document.querySelector('#toreadBtn');
@@ -72,9 +82,10 @@
                 dbRef.ref().child('reading').push({
                     bookname: readingField
                 }).then(function() {
-                    console.log('success!book added successfully');
+                    // console.log('success!book added successfully');
                     insertIntoList(readingField, "readingUl");
                     inputClearFunction("readingInput");
+                    getDbData('reading');
 
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
@@ -87,9 +98,11 @@
                 dbRef.ref().child('toread').push({
                     bookname: toreadField
                 }).then(function() {
-                    console.log('success!book added successfully');
+                    // console.log('success!book added successfully');
                     insertIntoList(toreadField, "toreadUl");
                     inputClearFunction("toreadInput");
+                    getDbData('toread');
+
 
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
@@ -103,9 +116,11 @@
                 dbRef.ref().child('read').push({
                     bookname: readField
                 }).then(function() {
-                    console.log('success!book added successfully');
+                    // console.log('success!book added successfully');
                     insertIntoList(readField, "readUl");
                     inputClearFunction("readInput");
+                    getDbData('read');
+
 
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
@@ -115,7 +130,6 @@
 
             function insertIntoList(bookName, UlIdParam) {
                 var liElement = document.createElement('li');
-                console.log('ulidparam' + UlIdParam);
                 var ulId = document.querySelector('#' + UlIdParam);
                 liElement.innerText = bookName;
                 liElement.id = bookName;
