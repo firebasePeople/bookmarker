@@ -74,8 +74,10 @@
                 }).then(function() {
                     console.log('success!book added successfully');
                     insertIntoList(readingField, "readingUl");
+                    inputClearFunction("readingInput");
+
                 }).catch(function(error) {
-                    console.log('error in adding book');
+                    window.alert('error adding book to the list');
                 });
                 console.log(readingField);
             });
@@ -86,10 +88,12 @@
                     bookname: toreadField
                 }).then(function() {
                     console.log('success!book added successfully');
-                    insertIntoList(toreadField, "toreadUl")
+                    insertIntoList(toreadField, "toreadUl");
+                    inputClearFunction("toreadInput");
 
                 }).catch(function(error) {
-                    console.log('error in adding book');
+                    window.alert('error adding book to the list');
+
                 });
                 console.log(toreadField);
             });
@@ -100,9 +104,11 @@
                     bookname: readField
                 }).then(function() {
                     console.log('success!book added successfully');
-                    insertIntoList(readField, "readUl")
+                    insertIntoList(readField, "readUl");
+                    inputClearFunction("readInput");
+
                 }).catch(function(error) {
-                    console.log('error in adding book');
+                    window.alert('error adding book to the list');
                 });
                 console.log(readField);
             });
@@ -114,6 +120,11 @@
                 liElement.innerText = bookName;
                 liElement.id = bookName;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
+            }
+
+            function inputClearFunction(inputFieldId) {
+                var tempreadIP = document.getElementById(inputFieldId);
+                tempreadIP.value = '';
             }
 
         });
