@@ -102,9 +102,10 @@
             };
 
             //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
-            // function removeInconsistency(bookId) {
+            function removeInconsistency(bookId) {
+                console.log('remove inconsistency fired');
 
-            // }
+            };
 
 
             var readingBtn = document.querySelector('#readingBtn');
@@ -122,6 +123,7 @@
                     insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
+                    removeInconsistency(readingIsbn);
                     // getDbData('reading');
                 }).catch(function(error) {
                     console.log(error);
@@ -140,6 +142,8 @@
                     insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
+                    removeInconsistency(toreadIsbn);
+
                     // getDbData('toread');
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
@@ -157,6 +161,8 @@
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
+                    removeInconsistency(readIsbn);
+
                     // getDbData('read');
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
