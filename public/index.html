@@ -68,16 +68,20 @@
 
             function getDbData(collectionName) {
                 var collRef = dbRef.ref().child(collectionName);
-
+                // console.log(collRef.parent.name);
                 collRef.on('value', function(snapshot) {
-                    console.log(snapshot.val());
+                    var bookList = snapshot.val();
+                    console.log(bookList);
+                    console.log(snapshot.key);
+                    bookList.forEach(insertIntoList(bookName, bookIsbn, snapshot.key));
+
                 });
             };
 
             //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
-            function removeInconsistency(bookId) {
+            // function removeInconsistency(bookId) {
 
-            }
+            // }
 
 
             var readingBtn = document.querySelector('#readingBtn');
@@ -155,6 +159,8 @@
                 var tempreadIP = document.getElementById(inputFieldId);
                 tempreadIP.value = '';
             }
+
+            getDbData('reading');
 
         });
     </script>
