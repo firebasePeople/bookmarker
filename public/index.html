@@ -72,8 +72,9 @@
                 collRef.on('value', function(snapshot) {
                     var bookList = snapshot.val();
                     console.log(bookList);
-                    console.log(snapshot.key);
-                    bookList.forEach(insertIntoList(bookName, bookIsbn, snapshot.key));
+                    // console.log(bookList);
+                    // console.log(snapshot.key);
+                    // bookList.forEach();
 
                 });
             };
