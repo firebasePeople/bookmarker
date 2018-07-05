@@ -13,6 +13,7 @@
     <div id="readingDiv">
         <h4>Reading</h4>
         <input type="text" name="readingInput" id="readingInput" placeholder="add new book" />
+        <input type="text" name="readingIsbn" id="readingIsbn" placeholder="add book's isbn" />
         <button id="readingBtn">Add</button>
 
         <ul id="readingUl">
@@ -22,6 +23,7 @@
     <div id="toreadDiv">
         <h4>To read</h4>
         <input type="text" name="toreadInput" id="toreadInput" placeholder="add new book" />
+        <input type="text" name="toreadIsbn" id="toreadIsbn" placeholder="add book's isbn" />
         <button id="toreadBtn">Add</button>
         <ul id="toreadUl">
             <li>To read</li>
@@ -30,6 +32,7 @@
     <div id="readDiv">
         <h4>Done reading</h4>
         <input type="text" name="readInput" id="readInput" placeholder="add new book" />
+        <input type="text" name="readIsbn" id="readIsbn" placeholder="add book's isbn" />
         <button id="readBtn">Add</button>
         <ul id="readUl">
             <li>Done Reading</li>
@@ -45,7 +48,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-messaging.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-functions.js"></script> -->
     <script>
-        // Initialize Firebase
         var config = {
             apiKey: "AIzaSyC8fCrFKojwN3idl3rxDbdl87PzFYP7kNk",
             authDomain: "booktracker-9643e.firebaseapp.com",
@@ -72,6 +74,11 @@
                 });
             };
 
+            //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
+            function removeInconsistency(bookId) {
+
+            }
+
 
             var readingBtn = document.querySelector('#readingBtn');
             var toreadBtn = document.querySelector('#toreadBtn');
@@ -79,28 +86,35 @@
 
             readingBtn.addEventListener('click', function() {
                 var readingField = document.querySelector('#readingInput').value;
+                var readingIsbn = document.querySelector('#readingIsbn').value;
                 dbRef.ref().child('reading').push({
-                    bookname: readingField
+                    name: readingField,
+                    isbn: readingIsbn
                 }).then(function() {
                     // console.log('success!book added successfully');
-                    insertIntoList(readingField, "readingUl");
+                    insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
+                    inputClearFunction("readingIsbn");
                     getDbData('reading');
 
                 }).catch(function(error) {
+                    console.log(error);
                     window.alert('error adding book to the list');
                 });
-                console.log(readingField);
+                console.log(readingField + ' ' + readingIsbn);
             });
 
             toreadBtn.addEventListener('click', function() {
                 var toreadField = document.querySelector('#toreadInput').value;
+                var toreadIsbn = document.querySelector('#toreadIsbn').value;
                 dbRef.ref().child('toread').push({
-                    bookname: toreadField
+                    bookname: toreadField,
+                    isbn: toreadIsbn
                 }).then(function() {
                     // console.log('success!book added successfully');
-                    insertIntoList(toreadField, "toreadUl");
+                    insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
+                    inputClearFunction("toreadIsbn");
                     getDbData('toread');
 
 
@@ -108,30 +122,31 @@
                     window.alert('error adding book to the list');
 
                 });
-                console.log(toreadField);
+                console.log(toreadField + ' ' + toreadIsbn);
             });
 
             readBtn.addEventListener('click', function() {
                 var readField = document.querySelector('#readInput').value;
+                var readIsbn = document.querySelector('#readIsbn').value;
                 dbRef.ref().child('read').push({
-                    bookname: readField
+                    bookname: readField,
+                    isbn: readIsbn
                 }).then(function() {
                     // console.log('success!book added successfully');
-                    insertIntoList(readField, "readUl");
+                    insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
+                    inputClearFunction("readIsbn");
                     getDbData('read');
-
-
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
                 console.log(readField);
             });
 
-            function insertIntoList(bookName, UlIdParam) {
+            function insertIntoList(bookName, bookIsbn, UlIdParam) {
                 var liElement = document.createElement('li');
                 var ulId = document.querySelector('#' + UlIdParam);
-                liElement.innerText = bookName;
+                liElement.innerText = bookName + ', isbn -' + bookIsbn;
                 liElement.id = bookName;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             }
