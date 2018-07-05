@@ -65,32 +65,16 @@
 
             var dbRef = firebase.database();
 
-            function insertIntoList(bookName, bookIsbn, UlIdParam) {
-                console.log(bookName + bookIsbn + UlIdParam);
-                var liElement = document.createElement('li');
-                var ulId = document.querySelector('#' + UlIdParam);
-                liElement.innerText = bookName + ', isbn -' + bookIsbn;
-                // liElement.id = bookName;
-                ulId.insertBefore(liElement, ulId.childNodes[0]);
-            };
-
-            function inputClearFunction(inputFieldId) {
-                var tempreadIP = document.getElementById(inputFieldId);
-                tempreadIP.value = '';
-            };
 
             function getDbData(collectionName) {
                 var collRef = dbRef.ref().child(collectionName);
                 // console.log(collRef.parent.name);
-                collRef.once('value', function(snapshot) {
+                collRef.on('value', function(snapshot) {
                     var bookList = snapshot.val();
+                    console.log(bookList);
                     // console.log(bookList);
-                    for (var key in bookList) {
-                        var bookname = snapshot.child(key).child("name").val();
-                        var bookisbn = snapshot.child(key).child("isbn").val();
-                        // console.log(bookname + bookisbn + 'getdbdata call');
-                        insertIntoList(bookname, bookisbn, snapshot.key + 'Ul');
-                    };
+                    // console.log(snapshot.key);
+                    // bookList.forEach();
 
                 });
             };
@@ -129,7 +113,7 @@
                 var toreadField = document.querySelector('#toreadInput').value;
                 var toreadIsbn = document.querySelector('#toreadIsbn').value;
                 dbRef.ref().child('toread').push({
-                    name: toreadField,
+                    bookname: toreadField,
                     isbn: toreadIsbn
                 }).then(function() {
                     // console.log('success!book added successfully');
@@ -150,7 +134,7 @@
                 var readField = document.querySelector('#readInput').value;
                 var readIsbn = document.querySelector('#readIsbn').value;
                 dbRef.ref().child('read').push({
-                    name: readField,
+                    bookname: readField,
                     isbn: readIsbn
                 }).then(function() {
                     // console.log('success!book added successfully');
@@ -161,12 +145,23 @@
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
-                // console.log(readField);
+                console.log(readField);
             });
 
+            function insertIntoList(bookName, bookIsbn, UlIdParam) {
+                var liElement = document.createElement('li');
+                var ulId = document.querySelector('#' + UlIdParam);
+                liElement.innerText = bookName + ', isbn -' + bookIsbn;
+                liElement.id = bookName;
+                ulId.insertBefore(liElement, ulId.childNodes[0]);
+            }
+
+            function inputClearFunction(inputFieldId) {
+                var tempreadIP = document.getElementById(inputFieldId);
+                tempreadIP.value = '';
+            }
+
             getDbData('reading');
-            getDbData('toread');
-            getDbData('read');
 
         });
     </script>
