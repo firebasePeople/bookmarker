@@ -12,6 +12,8 @@
     <h2>My booktracker</h2>
     <div id="readingDiv">
         <h4>Reading</h4>
+        <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
+        <br />
         <input type="text" name="readingInput" id="readingInput" placeholder="add new book" />
         <input type="text" name="readingIsbn" id="readingIsbn" placeholder="add book's isbn" />
         <button id="readingBtn">Add</button>
@@ -22,6 +24,8 @@
     </div>
     <div id="toreadDiv">
         <h4>To read</h4>
+        <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
+        <br />
         <input type="text" name="toreadInput" id="toreadInput" placeholder="add new book" />
         <input type="text" name="toreadIsbn" id="toreadIsbn" placeholder="add book's isbn" />
         <button id="toreadBtn">Add</button>
@@ -31,6 +35,8 @@
     </div>
     <div id="readDiv">
         <h4>Done reading</h4>
+        <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
+        <br />
         <input type="text" name="readInput" id="readInput" placeholder="add new book" />
         <input type="text" name="readIsbn" id="readIsbn" placeholder="add book's isbn" />
         <button id="readBtn">Add</button>
@@ -39,8 +45,6 @@
         </ul>
     </div>
 
-
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
@@ -119,12 +123,10 @@
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
                     // getDbData('reading');
-
                 }).catch(function(error) {
                     console.log(error);
                     window.alert('error adding book to the list');
                 });
-                console.log(readingField + ' ' + readingIsbn);
             });
 
             toreadBtn.addEventListener('click', function() {
@@ -139,13 +141,9 @@
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
                     // getDbData('toread');
-
-
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
-
                 });
-                console.log(toreadField + ' ' + toreadIsbn);
             });
 
             readBtn.addEventListener('click', function() {
@@ -163,7 +161,6 @@
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
-                // console.log(readField);
             });
 
             getDbData('reading');
