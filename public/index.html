@@ -72,10 +72,10 @@
             var dbRef = firebase.database();
 
             function insertIntoList(bookName, bookIsbn, UlIdParam) {
-                console.log(bookName + bookIsbn + UlIdParam);
+                // console.log(bookName + bookIsbn + UlIdParam);
                 var liElement = document.createElement('li');
                 var ulId = document.querySelector('#' + UlIdParam);
-                liElement.innerText = bookName + ', isbn -' + bookIsbn;
+                liElement.innerText = bookName + ', ' + bookIsbn;
                 // liElement.id = bookName;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             };
@@ -102,9 +102,13 @@
             };
 
             //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
-            function removeInconsistency(bookId) {
-                console.log('remove inconsistency fired');
-
+            function removeInconsistency(bookIsbn) {
+                var readingRef = dbRef.ref("reading");
+                // console.log(readingRef.ref());
+                readingRef.equalTo(bookIsbn).on("child_added", function(snapshot) {
+                    console.log(snapshot.val());
+                    // console.log(testRef.exists());
+                });
             };
 
 
@@ -142,7 +146,7 @@
                     insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
-                    removeInconsistency(toreadIsbn);
+                    // removeInconsistency(toreadIsbn);
 
                     // getDbData('toread');
                 }).catch(function(error) {
@@ -161,7 +165,7 @@
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
-                    removeInconsistency(readIsbn);
+                    // removeInconsistency(readIsbn);
 
                     // getDbData('read');
                 }).catch(function(error) {
