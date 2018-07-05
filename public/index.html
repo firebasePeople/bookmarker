@@ -47,16 +47,18 @@
     <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-messaging.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-functions.js"></script> -->
+
     <script>
         var config = {
-            apiKey: "AIzaSyC8fCrFKojwN3idl3rxDbdl87PzFYP7kNk",
-            authDomain: "booktracker-9643e.firebaseapp.com",
-            databaseURL: "https://booktracker-9643e.firebaseio.com",
-            projectId: "booktracker-9643e",
-            storageBucket: "booktracker-9643e.appspot.com",
-            messagingSenderId: "801458307525"
+            apiKey: "AIzaSyACQuhx5EFgF-blK07IOMVxvnhs-_5EpuI",
+            authDomain: "aptrack-energyhack.firebaseapp.com",
+            databaseURL: "https://aptrack-energyhack.firebaseio.com",
+            projectId: "aptrack-energyhack",
+            storageBucket: "aptrack-energyhack.appspot.com",
+            messagingSenderId: "12574207374"
         };
         firebase.initializeApp(config);
+    </script>
     </script>
 
     <script>
@@ -116,7 +118,7 @@
                     insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
-                    getDbData('reading');
+                    // getDbData('reading');
 
                 }).catch(function(error) {
                     console.log(error);
@@ -136,7 +138,7 @@
                     insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
-                    getDbData('toread');
+                    // getDbData('toread');
 
 
                 }).catch(function(error) {
@@ -157,7 +159,7 @@
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
-                    getDbData('read');
+                    // getDbData('read');
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
