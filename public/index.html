@@ -103,11 +103,17 @@
 
             //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
             function removeInconsistency(bookIsbn) {
-                var readingRef = dbRef.ref("reading");
-                // console.log(readingRef.ref());
-                readingRef.equalTo(bookIsbn).on("child_added", function(snapshot) {
+                var readingRef = dbRef.ref("reading/");
+                var toreadRef = dbRef.ref("toread/");
+                var readRef = dbRef.ref("read/");
+
+                const query = readingRef.orderByChild('isbn').equalTo(bookIsbn);
+
+                query.on("value", snapshot => {
                     console.log(snapshot.val());
-                    // console.log(testRef.exists());
+                    if (snapshot.exists() {
+
+                        });
                 });
             };
 
@@ -123,12 +129,10 @@
                     name: readingField,
                     isbn: readingIsbn
                 }).then(function() {
-                    // console.log('success!book added successfully');
                     insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
-                    removeInconsistency(readingIsbn);
-                    // getDbData('reading');
+                    // removeInconsistency(readingIsbn);
                 }).catch(function(error) {
                     console.log(error);
                     window.alert('error adding book to the list');
@@ -138,17 +142,15 @@
             toreadBtn.addEventListener('click', function() {
                 var toreadField = document.querySelector('#toreadInput').value;
                 var toreadIsbn = document.querySelector('#toreadIsbn').value;
-                dbRef.ref().child('toread').push({
+                dbRef.ref().child(isbn).set({
                     name: toreadField,
-                    isbn: toreadIsbn
+                    category: "toread"
                 }).then(function() {
                     // console.log('success!book added successfully');
                     insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
                     // removeInconsistency(toreadIsbn);
-
-                    // getDbData('toread');
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
@@ -161,13 +163,10 @@
                     name: readField,
                     isbn: readIsbn
                 }).then(function() {
-                    // console.log('success!book added successfully');
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
                     // removeInconsistency(readIsbn);
-
-                    // getDbData('read');
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
