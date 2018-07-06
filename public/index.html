@@ -111,9 +111,9 @@
 
                 query.on("value", snapshot => {
                     console.log(snapshot.val());
-                    if (snapshot.exists() {
+                    // if (snapshot.exists() {
 
-                        });
+                    //     });
                 });
             };
 
@@ -142,7 +142,7 @@
             toreadBtn.addEventListener('click', function() {
                 var toreadField = document.querySelector('#toreadInput').value;
                 var toreadIsbn = document.querySelector('#toreadIsbn').value;
-                dbRef.ref().child(isbn).set({
+                dbRef.ref().child(toreadIsbn).set({
                     name: toreadField,
                     category: "toread"
                 }).then(function() {
