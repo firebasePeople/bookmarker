@@ -125,9 +125,9 @@
             readingBtn.addEventListener('click', function() {
                 var readingField = document.querySelector('#readingInput').value;
                 var readingIsbn = document.querySelector('#readingIsbn').value;
-                dbRef.ref().child('reading').push({
+                dbRef.ref().child(readingIsbn).set({
                     name: readingField,
-                    isbn: readingIsbn
+                    category: "reading"
                 }).then(function() {
                     insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
@@ -159,9 +159,9 @@
             readBtn.addEventListener('click', function() {
                 var readField = document.querySelector('#readInput').value;
                 var readIsbn = document.querySelector('#readIsbn').value;
-                dbRef.ref().child('read').push({
+                dbRef.ref().child(readIsbn).set({
                     name: readField,
-                    isbn: readIsbn
+                    category: "read"
                 }).then(function() {
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
