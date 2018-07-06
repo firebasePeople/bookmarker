@@ -12,6 +12,7 @@
     <h2>My booktracker</h2>
     <div id="readingDiv">
         <h4>Reading</h4>
+        <p style="background-color:rgb(98, 226, 98)" class="notifyReading"></p>
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="readingInput" id="readingInput" placeholder="add new book" />
@@ -24,6 +25,7 @@
     </div>
     <div id="toreadDiv">
         <h4>To read</h4>
+        <p style="background-color:rgb(98, 226, 98)" class="notifyToRead"></p>
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="toreadInput" id="toreadInput" placeholder="add new book" />
@@ -35,6 +37,8 @@
     </div>
     <div id="readDiv">
         <h4>Done reading</h4>
+        <p style="background-color:rgb(98, 226, 98)" class="notifyRead"></p>
+
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="readInput" id="readInput" placeholder="add new book" />
@@ -75,7 +79,7 @@
                 // console.log(bookName + bookIsbn + UlIdParam);
                 var liElement = document.createElement('li');
                 var ulId = document.querySelector('#' + UlIdParam);
-                liElement.innerText = bookName + ', ' + bookIsbn;
+                liElement.innerHTML = '<span>Book Name :' + bookName + '</span> <br />' + '<span>ISBN : ' + bookIsbn + '</span> <br />';
                 // liElement.id = bookName;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             };
@@ -132,6 +136,7 @@
                     insertIntoList(readingField, readingIsbn, "readingUl");
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
+                    document.getElementById("notifyReading").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
                     // removeInconsistency(readingIsbn);
                 }).catch(function(error) {
                     console.log(error);
@@ -150,6 +155,7 @@
                     insertIntoList(toreadField, toreadIsbn, "toreadUl");
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
+                    document.getElementById("notifyToRead").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
                     // removeInconsistency(toreadIsbn);
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
@@ -166,6 +172,7 @@
                     insertIntoList(readField, readIsbn, "readUl");
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
+                    document.getElementById("notifyRead").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
                     // removeInconsistency(readIsbn);
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
