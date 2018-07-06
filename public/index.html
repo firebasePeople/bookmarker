@@ -12,7 +12,7 @@
     <h2>My booktracker</h2>
     <div id="readingDiv">
         <h4>Reading</h4>
-        <p style="background-color:rgb(98, 226, 98)" class="notifyReading"></p>
+        <p style="background-color:rgb(98, 226, 98)" id="notifyReading"></p>
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="readingInput" id="readingInput" placeholder="add new book" />
@@ -25,7 +25,7 @@
     </div>
     <div id="toreadDiv">
         <h4>To read</h4>
-        <p style="background-color:rgb(98, 226, 98)" class="notifyToRead"></p>
+        <p style="background-color:rgb(98, 226, 98)" id="notifyToRead"></p>
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="toreadInput" id="toreadInput" placeholder="add new book" />
@@ -37,7 +37,7 @@
     </div>
     <div id="readDiv">
         <h4>Done reading</h4>
-        <p style="background-color:rgb(98, 226, 98)" class="notifyRead"></p>
+        <p style="background-color:rgb(98, 226, 98)" id="notifyRead"></p>
 
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
@@ -137,6 +137,9 @@
                     inputClearFunction("readingInput");
                     inputClearFunction("readingIsbn");
                     document.getElementById("notifyReading").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
+                    setTimeout(function() {
+                        document.getElementById("notifyReading").innerHTML = "";
+                    }, 2000);
                     // removeInconsistency(readingIsbn);
                 }).catch(function(error) {
                     console.log(error);
@@ -156,7 +159,9 @@
                     inputClearFunction("toreadInput");
                     inputClearFunction("toreadIsbn");
                     document.getElementById("notifyToRead").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
-                    // removeInconsistency(toreadIsbn);
+                    setTimeout(function() {
+                        document.getElementById("notifyReading").innerHTML = "";
+                    }, 2000);
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
@@ -173,7 +178,9 @@
                     inputClearFunction("readInput");
                     inputClearFunction("readIsbn");
                     document.getElementById("notifyRead").innerHTML = "Congrats! The book has been added to the list. If the book was already in this category, its not added.!";
-                    // removeInconsistency(readIsbn);
+                    setTimeout(function() {
+                        document.getElementById("notifyReading").innerHTML = "";
+                    }, 2000);
                 }).catch(function(error) {
                     window.alert('error adding book to the list');
                 });
