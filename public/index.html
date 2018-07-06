@@ -89,18 +89,20 @@
                 tempreadIP.value = '';
             };
 
-            function getDbData(collectionName) {
-                var collRef = dbRef.ref().child(collectionName);
+            function getDbData() {
+                var collRef = dbRef.ref().child("isbn");
+                console.log(collRef);
                 // console.log(collRef.parent.name);
                 collRef.once('value', function(snapshot) {
                     var bookList = snapshot.val();
+                    console.log(bookList);
                     // console.log(bookList);
-                    for (var key in bookList) {
-                        var bookname = snapshot.child(key).child("name").val();
-                        var bookisbn = snapshot.child(key).child("isbn").val();
-                        // console.log(bookname + bookisbn + 'getdbdata call');
-                        insertIntoList(bookname, bookisbn, snapshot.key + 'Ul');
-                    };
+                    // for (var key in bookList) {
+                    //     var bookname = snapshot.child(key).child("name").val();
+                    //     var bookisbn = snapshot.child(key).child("isbn").val();
+                    //     // console.log(bookname + bookisbn + 'getdbdata call');
+                    //     insertIntoList(bookname, bookisbn, snapshot.key + 'Ul');
+                    // };
 
                 });
             };
@@ -186,9 +188,9 @@
                 });
             });
 
-            getDbData('reading');
-            getDbData('toread');
-            getDbData('read');
+            getDbData();
+            // getDbData('toread');
+            // getDbData('read');
 
         });
     </script>
