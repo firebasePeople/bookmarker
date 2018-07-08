@@ -14,6 +14,8 @@
     <div id="readingDiv">
         <h4>Reading</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyReading"></p>
+        <p style="background-color:rgb(226, 117, 98)" id="notifyReadingDelete"></p>
+
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="readingInput" id="readingInput" placeholder="add new book" />
@@ -27,6 +29,8 @@
     <div id="toreadDiv">
         <h4>To read</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyToRead"></p>
+        <p style="background-color:rgb(226, 117, 98)" id="notifyToReadDelete"></p>
+
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
         <input type="text" name="toreadInput" id="toreadInput" placeholder="add new book" />
@@ -39,6 +43,7 @@
     <div id="readDiv">
         <h4>Done reading</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyRead"></p>
+        <p style="background-color:rgb(226, 117, 98)" id="notifyReadDelete"></p>
 
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
@@ -59,8 +64,11 @@
 
     <script>
         function deleteBook(bookIsbn) {
+            var dbRef = firebase.database();
+            dbRef.ref().child(bookIsbn).set(null);
             // console.log(bookIsbn);
             document.getElementById(bookIsbn).outerHTML = "";
+
 
         };
     </script>
