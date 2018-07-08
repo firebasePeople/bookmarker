@@ -28,6 +28,8 @@
         // };
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 </head>
 
 
@@ -41,6 +43,7 @@
         <label for="bookByIsbn">Enter ISBN number of book to search</label>
         <input type="text" name="bookByIsbn" id="bookByIsbn" placeholder="Enter ISBN" />
         <button type="button" value="Search" id="searchBookByIsbn">Search</button>
+        <span id="bookStatus"></span>
 
     </div>
 
@@ -87,8 +90,6 @@
         </ul>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
@@ -116,10 +117,39 @@
 
             searchBtn.addEventListener("click", function() {
                 var bookId = document.getElementById("bookByIsbn").value;
-                console.log(bookId);
+                // // console.log(bookId);
 
+                // // var url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + bookId;
 
+                // var response = $.get("https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyDLkn-xLQQeJhrCDqjnGEklXdfaGMCDj4E");
+                console.log('search button hit');
+                var url = "https://www.googleapis.com/books/v1/volumes?q=flowers+isbn:" + bookId + "&key=AIzaSyDLkn-xLQQeJhrCDqjnGEklXdfaGMCDj4E";
+                // var url = "https://www.googleapis.com/books/v1/volumes?q=" + bookId;
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    headers: {
+                        'X-Alt-Referer': "https://aptrack-energyhack.firebaseapp.com"
+                    },
+                    success: function(result) {
+                        // if (totalItems == 0) {
+                        //     console.log('no book found');
+                        // }
+                        if (result.totalItems == 0) {
+                            document.getElementById("bookStatus").innerHTML = "book not found";
+                            return;
+                        }
+                        console.log(result.items[0].volumeInfo.title);
+                        document.getElementById("bookStatus").innerHTML = "Found ' " + result.items[0].volumeInfo.title + " ' by " + result.items[0].volumeInfo.authors[0]
+                        ".";
+
+                        // console.log(result);
+                    }
+                });
             });
+
+
+            // });
 
 
             var dbRef = firebase.database();
