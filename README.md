@@ -1,5 +1,9 @@
 # booktracker
 
+### Todo
+Integrate google books api for search books by api functionality.
+``` https://developers.google.com/books/docs/v1/getting_started ```
+
 ## db schema
 
 isbnValue is a 13-digit number generally found on the back of the book.
