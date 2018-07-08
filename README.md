@@ -1,9 +1,14 @@
 # booktracker
 
-### Todo
-Integrate google books api for search books by api functionality.
-``` https://developers.google.com/books/docs/v1/getting_started ```
-``` https://ctrlq.org/code/20020-query-book-by-isbn ```
+### Announcement
+Booktracker is now open source!
+
+### TODO for later development and for open source 
+ . styling and working on ui/ux
+ . include firebase.auth() support
+ . link to a github repo which contains three files reading.txt toread.txt read.txt for people who like to maintain their book track     in a github repo.
+ include more and submit a pr 
+ 
 
 ## db schema
 
