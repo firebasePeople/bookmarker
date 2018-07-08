@@ -84,27 +84,38 @@
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             };
 
+            //function to clear input fields after book inserts
             function inputClearFunction(inputFieldId) {
                 var tempreadIP = document.getElementById(inputFieldId);
                 tempreadIP.value = '';
             };
 
             function getDbData() {
-                var collRef = dbRef.ref().child("isbn");
-                console.log(collRef);
+                var collRef = dbRef.ref("/");
+                // console.log(collRef);
+
                 // console.log(collRef.parent.name);
                 collRef.once('value', function(snapshot) {
-                    var bookList = snapshot.val();
-                    console.log(bookList);
+                    // console.log(snapshot.val());
+
+                    // var bookList = snapshot.val();
                     // console.log(bookList);
-                    // for (var key in bookList) {
+                    snapshot.forEach(function(book) {
+                        // console.log(book.val());
+                        // if (book.val().category == 'toread') {
+                        insertIntoList(book.val().name, book.ref.key, book.val().category + 'Ul');
+                        // console.log(book.ref.key); --returns isbn
+                        // }
+                    });
+
                     //     var bookname = snapshot.child(key).child("name").val();
                     //     var bookisbn = snapshot.child(key).child("isbn").val();
-                    //     // console.log(bookname + bookisbn + 'getdbdata call');
+
                     //     insertIntoList(bookname, bookisbn, snapshot.key + 'Ul');
                     // };
 
                 });
+                // });
             };
 
             //this function searches for books with same isbn in the db in all the three columns. If there is any, it is removed from that column.
