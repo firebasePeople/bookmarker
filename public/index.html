@@ -11,10 +11,13 @@
 
 <body>
     <h2>My booktracker</h2>
+
+    <p style="background-color:rgb(226, 117, 98)" id="notifyDelete"></p>
+
+
     <div id="readingDiv">
         <h4>Reading</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyReading"></p>
-        <p style="background-color:rgb(226, 117, 98)" id="notifyReadingDelete"></p>
 
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
@@ -29,7 +32,7 @@
     <div id="toreadDiv">
         <h4>To read</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyToRead"></p>
-        <p style="background-color:rgb(226, 117, 98)" id="notifyToReadDelete"></p>
+        <!-- <p style="background-color:rgb(226, 117, 98)" id="notifyToReadDelete"></p> -->
 
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
@@ -43,7 +46,7 @@
     <div id="readDiv">
         <h4>Done reading</h4>
         <p style="background-color:rgb(98, 226, 98)" id="notifyRead"></p>
-        <p style="background-color:rgb(226, 117, 98)" id="notifyReadDelete"></p>
+        <!-- <p style="background-color:rgb(226, 117, 98)" id="notifyReadDelete"></p> -->
 
         <span style="color:orange">Enter book ID in the format  ISBN:###### </span>
         <br />
@@ -68,6 +71,10 @@
             dbRef.ref().child(bookIsbn).set(null);
             // console.log(bookIsbn);
             document.getElementById(bookIsbn).outerHTML = "";
+            document.getElementById("notifyDelete").innerHTML = "Book delete successful!";
+            setTimeout(function() {
+                document.getElementById("notifyDelete").innerHTML = "";
+            }, 2000);
 
 
         };
