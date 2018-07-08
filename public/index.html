@@ -8,6 +8,7 @@
 
 </head>
 
+
 <body>
     <h2>My booktracker</h2>
     <div id="readingDiv">
@@ -57,6 +58,14 @@
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-functions.js"></script> -->
 
     <script>
+        function deleteBook(bookIsbn) {
+            // console.log(bookIsbn);
+            document.getElementById(bookIsbn).outerHTML = "";
+
+        };
+    </script>
+
+    <script>
         var config = {
             apiKey: "AIzaSyACQuhx5EFgF-blK07IOMVxvnhs-_5EpuI",
             authDomain: "aptrack-energyhack.firebaseapp.com",
@@ -66,7 +75,6 @@
             messagingSenderId: "12574207374"
         };
         firebase.initializeApp(config);
-    </script>
     </script>
 
     <script>
@@ -79,10 +87,12 @@
                 // console.log(bookName + bookIsbn + UlIdParam);
                 var liElement = document.createElement('li');
                 var ulId = document.querySelector('#' + UlIdParam);
-                liElement.innerHTML = '<span>Book Name :' + bookName + '</span> <br />' + '<span>ISBN : ' + bookIsbn + '</span> <br />';
-                // liElement.id = bookName;
+                liElement.innerHTML = '<span>Book Name :' + bookName + '</span> <br />' + '<span>ISBN : ' + bookIsbn + '   <button type="button" onclick="deleteBook(' + bookIsbn + ')" id=' + bookIsbn + '>Delete</button>' + ' </span> <br />';
+                liElement.id = bookIsbn;
                 ulId.insertBefore(liElement, ulId.childNodes[0]);
             };
+
+            // var deleteBtn = document.getElementById()
 
             //function to clear input fields after book inserts
             function inputClearFunction(inputFieldId) {
@@ -94,26 +104,13 @@
                 var collRef = dbRef.ref("/");
                 // console.log(collRef);
 
-                // console.log(collRef.parent.name);
                 collRef.once('value', function(snapshot) {
-                    // console.log(snapshot.val());
 
-                    // var bookList = snapshot.val();
-                    // console.log(bookList);
                     snapshot.forEach(function(book) {
-                        // console.log(book.val());
-                        // if (book.val().category == 'toread') {
+
                         insertIntoList(book.val().name, book.ref.key, book.val().category + 'Ul');
-                        // console.log(book.ref.key); --returns isbn
-                        // }
+
                     });
-
-                    //     var bookname = snapshot.child(key).child("name").val();
-                    //     var bookisbn = snapshot.child(key).child("isbn").val();
-
-                    //     insertIntoList(bookname, bookisbn, snapshot.key + 'Ul');
-                    // };
-
                 });
                 // });
             };
@@ -128,9 +125,7 @@
 
                 query.on("value", snapshot => {
                     console.log(snapshot.val());
-                    // if (snapshot.exists() {
 
-                    //     });
                 });
             };
 
@@ -200,8 +195,6 @@
             });
 
             getDbData();
-            // getDbData('toread');
-            // getDbData('read');
 
         });
     </script>
